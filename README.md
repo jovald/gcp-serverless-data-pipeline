@@ -1,19 +1,23 @@
-# End to end serverless data pipeline with Cloud Functions, Pub/Sub and BigQuery on GCP
+# Serverless data pipeline with Cloud Functions, Pub/Sub and BigQuery on GCP
+
+The main goal of this repository is to shows how to build a simple data pipeline on GCP using some of its serverless services: **Cloud Functions**, **Pub/Sub**, **Cloud Scheduler** and **BigQuery**.
 
 ## Introduction
 
-WORK IN PROGRESS
+The pipeline consist of a process that regularly gets data from an API/service and store it on BigQuery. Considering its popularity, the current weather data API by **OpenWeatherMap** was choosen to exemplify the data gathering.
 
-This projects aims to accelerate data pipeline deployments for small data.
+### Reference architecture
+
+
 
 ### System requirements
 
 The following is needed in order to deploy the services:
 
 1. A [GCP project](https://cloud.google.com/resource-manager/docs/creating-managing-projects) with a [linked billing account](https://cloud.google.com/billing/docs/how-to/modify-project)
-2. Install and initilize the [Google Cloud SDK](https://cloud.google.com/sdk/install)
-3. Create an APP Engine app in yout project. [Why?](https://cloud.google.com/scheduler/docs/setup)
-4. Enable the Cloud Functions API, the Cloud Scheduler API and the APP Engine API
+2. Installed and initilized the [Google Cloud SDK](https://cloud.google.com/sdk/install)
+3. Created an APP Engine app in yout project. [Why?](https://cloud.google.com/scheduler/docs/setup)
+4. Enabled the Cloud Functions, Cloud Scheduler and APP Engine APIs
 5. An API Key from [OpenWeatherMap](https://openweathermap.org)
 
 ### Costs
@@ -84,22 +88,22 @@ gcloud scheduler jobs update pubsub $JOB_NAME --schedule=$SCHEDULE_TIME
 gcloud pubsub topics create $TOPIC_NAME
 ```
 
-### 4. Deploy the Cloud Function
-
-```sh
-gcloud functions deploy $FUNCTION_NAME --trigger-topic $TOPIC_NAME --runtime nodejs10 --set-env-vars OPEN_WEATHER_MAP_API_KEY=$OPEN_WEATHER_MAP_API_KEY,BQ_DATASET=$BQ_DATASET,BQ_TABLE=$BQ_TABLE
-```
-
-### 5. Create a BigQuery dataset
+### 4. Create a BigQuery dataset
 
 ```sh
 bq mk $BQ_DATASET
 ```
 
-### 6. Create a BigQuery table
+### 5. Create a BigQuery table
 
 ```sh
 bq mk --table $PROJECT_ID:$BQ_DATASET.$BQ_TABLE
+```
+
+### 6. Deploy the Cloud Function
+
+```sh
+gcloud functions deploy $FUNCTION_NAME --trigger-topic $TOPIC_NAME --runtime nodejs10 --set-env-vars OPEN_WEATHER_MAP_API_KEY=$OPEN_WEATHER_MAP_API_KEY,BQ_DATASET=$BQ_DATASET,BQ_TABLE=$BQ_TABLE
 ```
 
 ---

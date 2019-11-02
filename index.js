@@ -20,7 +20,7 @@ const bigquery = new BigQuery();
  */
 exports.loadDataIntoBigQuery = async () => {
   /*
-   * Define a temporal file for load the data into BigQuery.
+   * Define a temporal file to load the data into BigQuery.
    * Consider that a "more correct" form consist of loading the JSON file from GCS.
    */
   const tempLocalFile = path.join(os.tmpdir(), "tmpData.json");
@@ -35,6 +35,8 @@ exports.loadDataIntoBigQuery = async () => {
   };
 
   try {
+
+    // Get current weather data from OpenWeatherMap. The data is for Santiago, Chile
     const { data } = await axios.get(
       `https://api.openweathermap.org/data/2.5/weather?q=Santiago,cl&APPID=${openWeatherMapApiKey}`
     );
@@ -42,9 +44,9 @@ exports.loadDataIntoBigQuery = async () => {
     // It's not necessary this key value pair.
     delete data.weather;
 
-    // Flatten the json and add the timestamp.
+    // Flatten the json and add a timestamp to know the process time.
     const cleanedData = JSON.stringify(
-      utils.flatten({ ...data, timestamp: moment().format("YYYY-MM-DD hh:mm:ss") })
+      utils.flatten({ ...data, timestamp: moment().format("YYYY-MM-DD HH:mm:ss") })
     );
 
     // Just a temp writing to load the data
