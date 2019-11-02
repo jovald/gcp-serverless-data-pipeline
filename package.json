@@ -1,0 +1,16 @@
+{
+  "name": "gcp-serverless-data-pipeline",
+  "version": "1.0.0",
+  "description": "A serverless data pipeline build on Google Cloud Platform",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jose Valdebenito <pvpj017@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@google-cloud/bigquery": "^4.3.0",
+    "axios": "^0.19.0",
+    "moment": "^2.24.0"
+  }
+}
