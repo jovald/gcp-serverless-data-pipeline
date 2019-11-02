@@ -123,7 +123,11 @@ I want to write this section only as an opinion and give ideas of how to end thi
 
 Day to day, the Google's technological ecosystem grows rapidly. This project is a small (but concise) proof of how complete could be an end to end data solution built into this ecosystem.
 
-Just to try (you should do it), I built a report on Data Studio and was a great and fast experience. In my opinion, the analytical power of BigQuery combined with this report/dashboard tool is the perfect double for small and big data end prcosses.
+Just to try (you should do it), I built a report on Data Studio and was a great and fast experience. In my opinion, the analytical power of BigQuery combined with this report/dashboard tool is the perfect double for small and big data end prcosses. Look at this small beauty, just 20-30 minutes of learn by doing.
+
+![Data Studio](https://raw.githubusercontent.com/jovald/gcp-serverless-data-pipeline/assets/data-studio-sample.jpg)
+
+This is not propaganda, Google didn't payme for this (unfortunately).
 
 ---
 
