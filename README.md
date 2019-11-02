@@ -45,7 +45,7 @@ export TOPIC_NAME=<Your_Pub_Sub_Topic>
 export JOB_NAME=<Your_Cron_Scheduler_Job_Name>
 
 # The name of the function corresponds to the exported function name on index.js
-export FUNCTION_NAME="helloPubSub"
+export FUNCTION_NAME="loadDataIntoBigQuery"
 
 # E.g., if you want a frequency of execution of 1 hour, the variable should be SCHEDULE_TIME="every 1 hour".
 export SCHEDULE_TIME=<Your_Cron_Schedule>

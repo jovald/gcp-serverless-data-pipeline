@@ -18,7 +18,7 @@ const bigquery = new BigQuery();
  * @param {object} pubSubEvent The event payload.
  * @param {object} context The event metadata.
  */
-exports.helloPubSub = async () => {
+exports.loadDataIntoBigQuery = async () => {
   /*
    * Define a temporal file for load the data into BigQuery.
    * Consider that a "more correct" form consist of loading the JSON file from GCS.
