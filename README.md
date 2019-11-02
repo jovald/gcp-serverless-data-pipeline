@@ -125,7 +125,7 @@ I want to write this section only as an opinion and give ideas of how to end thi
 
 Also, you have to consider that this particular stage depends totally on the data or insights you want to obtain. [Felipe Hoffa](https://medium.com/@hoffa) illustrates different use cases and ideas using BigQuery, you should read him on Medium!
 
-## Query your BigQuery table
+### Query your BigQuery table
 
 Two options (clearly more).
 
@@ -137,7 +137,7 @@ bq query --nouse_legacy_sql "SELECT COUNT(*) FROM $BQ_DATASET.$BQ_TABLE"
 
 Second, BigQuery on the GCP Console is also an enjoyable manner to explore and analyze your data.
 
-### Data Studio as a great finale
+### Data Studio as the great finale
 
 Day to day, the Google's technological ecosystem grows rapidly. This project is a small, but concise, proof of how complete could be an end to end data solution built into this ecosystem.
 

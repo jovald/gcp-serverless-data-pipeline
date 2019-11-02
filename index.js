@@ -11,6 +11,9 @@ const { BigQuery } = require("@google-cloud/bigquery");
 const bigquery = new BigQuery();
 
 /**
+ * 
+ * Function that get data from OpenWeatherMap and load it into BigQuery.
+ * 
  * Background Cloud Function to be triggered by Pub/Sub.
  * This function is exported by index.js, and executed when
  * the trigger topic receives a message.
@@ -41,15 +44,15 @@ exports.loadDataIntoBigQuery = async () => {
       `https://api.openweathermap.org/data/2.5/weather?q=Santiago,cl&APPID=${openWeatherMapApiKey}`
     );
 
-    // It's not necessary this key value pair.
+    // this key value pair ar enot necessary.
     delete data.weather;
 
-    // Flatten the json and add a timestamp to know the process time.
+    // Flatten the json and add a timestamp to know the processing time.
     const cleanedData = JSON.stringify(
       utils.flatten({ ...data, timestamp: moment().format("YYYY-MM-DD HH:mm:ss") })
     );
 
-    // Just a temp writing to load the data
+    // Just a temp writing
     await fs.writeFile(tempLocalFile, cleanedData);
 
     // Load data into BigQuery
