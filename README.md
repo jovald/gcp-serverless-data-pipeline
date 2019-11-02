@@ -1,16 +1,25 @@
 # Serverless data pipeline with Cloud Functions, Pub/Sub and BigQuery on GCP
 
-The main goal of this repository is to shows how to build a simple data pipeline on GCP using some of its serverless services: **Cloud Functions**, **Pub/Sub**, **Cloud Scheduler** and **BigQuery**.
+This project aims to show how to implmenet a simple data pipeline on GCP using some of its serverless services: **Cloud Functions**, **Pub/Sub**, **Cloud Scheduler** and **BigQuery**.
 
 ## Introduction
 
-The pipeline consist of a process that regularly gets data from an API/service and store it on BigQuery. Considering its popularity, the current weather data API by **OpenWeatherMap** was choosen to exemplify the data gathering.
+The pipeline consist of a process that regularly gets data from an API and load it into BigQuery. Considering its popularity, the current weather data API by **OpenWeatherMap** was choosen to exemplify the data gathering stage.
 
 ### Reference architecture
 
-The next image shows the reference architecture for this projects.
+The next image shows the reference architecture for this project.
 
 ![Architecture](https://raw.githubusercontent.com/jovald/gcp-serverless-data-pipeline/assets/gcp-serverless-data-pipeline.jpg)
+
+### Talking about the pipeline
+
+The pipeline could be explained by the next steps:
+
+1. Depending on the frequency, a job of Cloud Scheduler triggers a topic on Cloud Pub/Sub.
+2. That action, executes a Cloud Function (*loadDataIntoBigQuery*) that gets data from OpenWeatherMap.
+3. Then, the data is loaded into BigQuery.
+4. Finaly, the data could be analyzed directly by querying BigQuery, or in Data Studio.
 
 ### System requirements
 
@@ -39,7 +48,7 @@ This sections shows you how to deploy all the services needed to run the pipelin
 
 ### Setting up environment variables
 
-Before continue, is prefereable to set up some environment variables that will help you executing the **gcloud** commands smoothly.
+Before continue, is prefereable to set up some environment variables that will help you executing the *gcloud* commands smoothly.
 
 ```sh
 export PROJECT_ID=<Your_Project_Id>
@@ -108,7 +117,23 @@ bq mk --table $PROJECT_ID:$BQ_DATASET.$BQ_TABLE
 gcloud functions deploy $FUNCTION_NAME --trigger-topic $TOPIC_NAME --runtime nodejs10 --set-env-vars OPEN_WEATHER_MAP_API_KEY=$OPEN_WEATHER_MAP_API_KEY,BQ_DATASET=$BQ_DATASET,BQ_TABLE=$BQ_TABLE
 ```
 
+## Data Studio as a great output
+
+I want to write this section only as an opinion and give ideas of how to end this pipeline as real king or queen of data.
+
+Day to day, the Google's technological ecosystem grows rapidly. This project is a small (but concise) proof of how complete could be an end to end data solution built into this ecosystem.
+
+Just to try (you should do it), I built a report on Data Studio and was a great and fast experience. In my opinion, the analytical power of BigQuery combined with this report/dashboard tool is the perfect double for small and big data end prcosses.
+
 ---
+
+## Authors
+
+* **[Jose Valdebenito](https://github.com/jovald)**
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
 ## Further readings
 
@@ -117,7 +142,3 @@ gcloud functions deploy $FUNCTION_NAME --trigger-topic $TOPIC_NAME --runtime nod
 * [Deploying from Your Local Machine](https://cloud.google.com/functions/docs/deploying/filesystem)
 * [Using Pub/Sub to trigger a Cloud Function](https://cloud.google.com/scheduler/docs/tut-pub-sub)
 * [Creating datasets](https://cloud.google.com/bigquery/docs/datasets)
-
-## Contributors
-
-**[Jose Valdebenito](https://github.com/jovald)**
