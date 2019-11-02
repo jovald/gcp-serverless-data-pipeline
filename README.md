@@ -14,12 +14,12 @@ The next image shows the reference architecture for this project.
 
 ### Talking about the pipeline
 
-The pipeline could be explained by the next steps:
+The process could be explained by the next steps:
 
 1. Depending on the frequency, a job of Cloud Scheduler triggers a topic on Cloud Pub/Sub.
 2. That action, executes a Cloud Function (*loadDataIntoBigQuery*) that gets data from OpenWeatherMap.
-3. Then, the data is loaded into BigQuery.
-4. Finaly, the data could be analyzed directly by querying BigQuery, or in Data Studio.
+3. Then, this data is loaded into BigQuery.
+4. Finally, the data could be analyzed directly BigQuery or Data Studio.
 
 ### System requirements
 
@@ -117,17 +117,35 @@ bq mk --table $PROJECT_ID:$BQ_DATASET.$BQ_TABLE
 gcloud functions deploy $FUNCTION_NAME --trigger-topic $TOPIC_NAME --runtime nodejs10 --set-env-vars OPEN_WEATHER_MAP_API_KEY=$OPEN_WEATHER_MAP_API_KEY,BQ_DATASET=$BQ_DATASET,BQ_TABLE=$BQ_TABLE
 ```
 
-## Data Studio as a great output
+---
+
+## What now
 
 I want to write this section only as an opinion and give ideas of how to end this pipeline as real king or queen of data.
 
-Day to day, the Google's technological ecosystem grows rapidly. This project is a small (but concise) proof of how complete could be an end to end data solution built into this ecosystem.
+Also, you have to consider that this particular stage depends totally on the data or insights you want to obtain. [Felipe Hoffa](https://medium.com/@hoffa) illustrates different use cases and ideas using BigQuery, you should read him on Medium!
 
-Just to try (you should do it), I built a report on Data Studio and was a great and fast experience. In my opinion, the analytical power of BigQuery combined with this report/dashboard tool is the perfect double for small and big data end prcosses. Look at this small beauty, just 20-30 minutes of learn by doing.
+## Query your BigQuery table
+
+Two options (clearly more).
+
+First, remember the env variables? they are still util. if you run the next command, a BigQuery job will be excuted that consist of a query to count all the records on your table. If you complete the steps above correctly, you will see at least one record counted.
+
+```sh
+bq query --nouse_legacy_sql "SELECT COUNT(*) FROM $BQ_DATASET.$BQ_TABLE"
+```
+
+Second, BigQuery on the GCP Console is also an enjoyable manner to explore and analyze your data.
+
+### Data Studio as a great finale
+
+Day to day, the Google's technological ecosystem grows rapidly. This project is a small, but concise, proof of how complete could be an end to end data solution built into this ecosystem.
+
+Just to try (you should do it), I built a report on Data Studio and was a great and fast experience. In my opinion, the analytical power of BigQuery combined with its report/dashboard tool is the perfect double for small and big data end prcosses. Look at this report, just 20-30 minutes of learn by doing, connected directly to BigQuery!
 
 ![Data Studio](https://raw.githubusercontent.com/jovald/gcp-serverless-data-pipeline/assets/data-studio-sample.png)
 
-This is not propaganda, Google didn't payme for this (unfortunately).
+*This is not propaganda, Google didn't payme for this (unfortunately).*
 
 ---
 
@@ -137,7 +155,7 @@ This is not propaganda, Google didn't payme for this (unfortunately).
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
 
 ## Further readings
 
