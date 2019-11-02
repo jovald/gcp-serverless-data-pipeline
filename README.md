@@ -8,7 +8,9 @@ The pipeline consist of a process that regularly gets data from an API/service a
 
 ### Reference architecture
 
+The next image shows the reference architecture for this projects.
 
+![Architecture](https://raw.githubusercontent.com/jovald/gcp-serverless-data-pipeline/assets/gcp-serverless-data-pipeline.png)
 
 ### System requirements
 
