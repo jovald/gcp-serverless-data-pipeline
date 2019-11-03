@@ -137,7 +137,7 @@ bq query --nouse_legacy_sql "SELECT COUNT(*) FROM $BQ_DATASET.$BQ_TABLE"
 
 Second, BigQuery on the GCP Console is also an enjoyable manner to explore and analyze your data.
 
-### Data Studio as the great finale
+### Data Studio, the great finale
 
 Day to day, the Google's technological ecosystem grows rapidly. This project is a small, but concise, proof of how complete could be an end to end data solution built into this ecosystem.
 
