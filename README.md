@@ -81,7 +81,13 @@ export BQ_TABLE=<Your_BQ_Table_Name>
 gcloud config set project $PROJECT_ID
 ```
 
-### 2. Create the Cloud Scheduler job
+### 2. Create the Cloud Pub/Sub topic
+
+```sh
+gcloud pubsub topics create $TOPIC_NAME
+```
+
+### 3. Create the Cloud Scheduler job
 
 ```sh
 gcloud scheduler jobs create pubsub $JOB_NAME --schedule=$SCHEDULE_TIME --topic=$TOPIC_NAME --message-body="execute"
@@ -91,12 +97,6 @@ If you want to change the frequency of the execution, the following command will
 
 ```sh
 gcloud scheduler jobs update pubsub $JOB_NAME --schedule=$SCHEDULE_TIME
-```
-
-### 3. Create the Cloud Pub/Sub topic
-
-```sh
-gcloud pubsub topics create $TOPIC_NAME
 ```
 
 ### 4. Create a BigQuery dataset
