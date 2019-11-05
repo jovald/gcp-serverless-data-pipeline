@@ -90,13 +90,13 @@ gcloud pubsub topics create $TOPIC_NAME
 ### 3. Create the Cloud Scheduler job
 
 ```sh
-gcloud scheduler jobs create pubsub $JOB_NAME --schedule=$SCHEDULE_TIME --topic=$TOPIC_NAME --message-body="execute"
+gcloud scheduler jobs create pubsub $JOB_NAME --schedule="$SCHEDULE_TIME" --topic=$TOPIC_NAME --message-body="execute"
 ```
 
 If you want to change the frequency of the execution, the following command will help:
 
 ```sh
-gcloud scheduler jobs update pubsub $JOB_NAME --schedule=$SCHEDULE_TIME
+gcloud scheduler jobs update pubsub $JOB_NAME --schedule="$SCHEDULE_TIME"
 ```
 
 ### 4. Create a BigQuery dataset
